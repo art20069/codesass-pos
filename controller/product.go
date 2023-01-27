@@ -92,7 +92,7 @@ func (p Product) Create(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	imagePath := "./uploads/products/" + uuid.New().String()
+	imagePath := "/uploads/products/" + uuid.New().String()
 	ctx.SaveUploadedFile(image, imagePath)
 
 	product := model.Product{
@@ -144,7 +144,7 @@ func (p Product) Update(ctx *gin.Context) {
 	}
 
 	if image != nil {
-		imagePath := "./uploads/products/" + uuid.New().String()
+		imagePath := "/uploads/products/" + uuid.New().String()
 		ctx.SaveUploadedFile(image, imagePath)
 		os.Remove(product.Image)
 		product.Image = imagePath
